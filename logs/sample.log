@@ -1,0 +1,10 @@
+2024-01-15 10:00:01  INFO  Login Success user=admin
+2024-01-15 10:00:05  INFO  Order Created order_id=1234
+2024-01-15 10:00:12  INFO  Payment Processed amount=$150.00
+2024-01-15 10:01:12  ERROR Database Timeout after 30000ms
+2024-01-15 10:01:13  ERROR Database Timeout after 30000ms
+2024-01-15 10:01:14  ERROR Connection Refused host=rds.amazonaws.com
+2024-01-15 10:01:15  ERROR Database Timeout after 30000ms
+2024-01-15 10:02:00  WARN  CPU High 87%
+2024-01-15 10:02:01  INFO  Retrying database connection...
+2024-01-15 10:02:05  ERROR Database Timeout after 30000ms

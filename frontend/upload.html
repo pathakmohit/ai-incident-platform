@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upload Logs – IncidentAI</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-icon">⬡</span>
+      <span class="brand-name">IncidentAI</span>
+    </div>
+    <ul class="sidebar-nav">
+      <li><a href="index.html">⊞ Dashboard</a></li>
+      <li class="active"><a href="upload.html">⬆ Upload Logs</a></li>
+      <li><a href="history.html">☰ Incident History</a></li>
+    </ul>
+    <div class="sidebar-footer">
+      <span class="status-dot green"></span>
+      <span>System Healthy</span>
+    </div>
+  </nav>
+
+  <main class="main">
+    <header class="page-header">
+      <div>
+        <h1>Upload Logs</h1>
+        <p class="subtitle">Upload a log file for AI-powered incident analysis</p>
+      </div>
+    </header>
+
+    <div class="two-col">
+      <!-- ── Upload Form ──────────────────────────────────────── -->
+      <section class="section">
+        <h2>Log File</h2>
+
+        <div class="upload-zone" id="upload-zone">
+          <div class="upload-icon">⬆</div>
+          <p class="upload-label">Drag & drop your log file here</p>
+          <p class="upload-meta">or click to browse — .log, .txt supported</p>
+          <input type="file" id="file-input" accept=".log,.txt" hidden />
+          <button class="btn btn-outline" onclick="document.getElementById('file-input').click()">Choose File</button>
+        </div>
+
+        <div class="file-selected hidden" id="file-selected">
+          <span class="file-icon">📄</span>
+          <span id="file-name-display">—</span>
+          <button class="btn-icon" onclick="clearFile()">✕</button>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Or paste log content</label>
+          <textarea class="form-textarea" id="log-text" placeholder="ERROR Database Timeout&#10;ERROR Connection Refused&#10;WARN CPU High"></textarea>
+        </div>
+
+        <button class="btn btn-primary btn-full" id="analyze-btn" onclick="analyzeLogs()">
+          Analyze with AI
+        </button>
+
+        <div class="divider-text">or</div>
+
+        <button class="btn btn-outline btn-full" onclick="loadSampleLogs()">
+          Load Sample Logs
+        </button>
+      </section>
+
+      <!-- ── Analysis Result ─────────────────────────────────── -->
+      <section class="section" id="result-section" style="display:none">
+        <h2>Analysis Result</h2>
+
+        <div class="result-card" id="result-card">
+          <div class="result-row">
+            <span class="result-label">Incident Type</span>
+            <span class="result-value" id="res-type">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Severity</span>
+            <span class="result-value" id="res-severity">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Confidence</span>
+            <span class="result-value" id="res-confidence">—</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">Errors Found</span>
+            <span class="result-value" id="res-errors">—</span>
+          </div>
+        </div>
+
+        <div class="recommendations" id="recommendations">
+          <h3>AI Recommendations</h3>
+          <ol id="rec-list"></ol>
+        </div>
+
+        <button class="btn btn-primary btn-full" onclick="saveIncident()">
+          Save to Incident History
+        </button>
+        <div class="save-msg hidden" id="save-msg">✓ Incident saved successfully</div>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

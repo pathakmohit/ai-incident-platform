@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-engine
+  namespace: ai-monitor
+  labels:
+    app: python-engine
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-engine
+  template:
+    metadata:
+      labels:
+        app: python-engine
+    spec:
+      containers:
+        - name: python-engine
+          image: YOUR_DOCKERHUB_USERNAME/ai-incident-python:latest
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "250m"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-engine-svc
+  namespace: ai-monitor
+spec:
+  selector:
+    app: python-engine
+  ports:
+    - port: 8000
+      targetPort: 8000
+  type: ClusterIP

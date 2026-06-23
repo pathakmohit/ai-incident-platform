@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Incident History – IncidentAI</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-icon">⬡</span>
+      <span class="brand-name">IncidentAI</span>
+    </div>
+    <ul class="sidebar-nav">
+      <li><a href="index.html">⊞ Dashboard</a></li>
+      <li><a href="upload.html">⬆ Upload Logs</a></li>
+      <li class="active"><a href="history.html">☰ Incident History</a></li>
+    </ul>
+    <div class="sidebar-footer">
+      <span class="status-dot green"></span>
+      <span>System Healthy</span>
+    </div>
+  </nav>
+
+  <main class="main">
+    <header class="page-header">
+      <div>
+        <h1>Incident History</h1>
+        <p class="subtitle">All recorded incidents from Amazon RDS</p>
+      </div>
+      <div class="header-actions">
+        <select class="form-select" id="severity-filter" onchange="filterIncidents()">
+          <option value="">All Severities</option>
+          <option value="HIGH">High</option>
+          <option value="MEDIUM">Medium</option>
+          <option value="LOW">Low</option>
+        </select>
+        <button class="btn btn-outline" onclick="exportCSV()">⬇ Export CSV</button>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="table-wrapper">
+        <table class="data-table" id="incidents-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Incident Type</th>
+              <th>Severity</th>
+              <th>Confidence</th>
+              <th>Detected At</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="incidents-tbody">
+            <tr><td colspan="6" class="loading-row">Loading incidents...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Detail Modal -->
+  <div class="modal-overlay hidden" id="modal-overlay" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modal-title">Incident Details</h3>
+        <button class="btn-icon" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    initHistory();
+  </script>
+</body>
+</html>
